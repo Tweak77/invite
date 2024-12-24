@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свидание</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .heart {
+            font-size: 2em;
+            color: red;
+            margin: 20px 0;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .form-container input[type="text"], .form-container input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            width: 80%;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Приглашение на свидание</h1>
+
+    <div class="heart">
+        ❤️
+    </div>
+
+    <div class="form-container">
+        <h2>Заполни форму для приглашения</h2>
+        
+        <form id="invitationForm">
+            <label for="partnerName">Введите имя партнёра:</label><br>
+            <input type="text" id="partnerName" name="partnerName" required><br><br>
+            
+            <label for="yourName">Введите ваше имя:</label><br>
+            <input type="text" id="yourName" name="yourName" required><br><br>
+            
+            <label for="response">Согласна ли ты пойти со мной на свидание? (да/нет):</label><br>
+            <input type="text" id="response" name="response" required><br><br>
+            
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        // Обработчик формы
+        document.getElementById("invitationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Получаем значения из формы
+            const partnerName = document.getElementById("partnerName").value;
+            const yourName = document.getElementById("yourName").value;
+            const response = document.getElementById("response").value.toLowerCase(); // Приводим к нижнему регистру
+
+            // Текст приглашения
+            const invitationText = `
+                Дорогая ${partnerName},
+                
+                Приглашаю тебя на свидание в кино! Мы так часто ходили в кино в самом начале наших отношений, и мне хочется снова вернуть те воспоминания — снова провести вечер в уютной атмосфере, наслаждаясь любимыми фильмами. Сегодня мы будем смотреть «Домовёнок» — фильм, который всегда напомнит нам о тех тёплых моментах.
+                
+                С нетерпением жду, чтобы снова увидеть твой смех и поделиться с тобой этим вечером.
+                
+                С любовью,  
+                ${yourName}
+            `;
+
+            // Сердечко
+            const heart = `
+                ❤️❤️❤️❤️❤️❤️❤️
+            `;
+
+            // Логика ответа
+            if (response === "да") {
+                document.getElementById("result").innerHTML = `
+                    <p>Отлично! Жду с нетерпением нашей встречи!</p>
+                    <p>${invitationText}</p>
+                    <p>${heart}</p>
+                `;
+            } else if (response === "нет") {
+                document.getElementById("result").innerHTML = `
+                    <p>Очень жаль! Надеюсь, в другой раз.</p>
+                `;
+            } else {
+                document.getElementById("result").innerHTML = `
+                    <p>Пожалуйста, напишите 'да' или 'нет'.</p>
+                `;
+            }
+        });
+    </script>
+
+</body>
+</html>
